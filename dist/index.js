@@ -73,7 +73,10 @@ var defineEnumUtils = function defineEnumUtils(enumCollection) {
     collection: collection,
     entries: Object.entries(collection),
     keys: Object.keys(collection),
-    values: Object.values(collection),
+    values: Object.values(collection).map(function (item) {
+      return item.hasOwnProperty('value') ? item.value : item;
+    }),
+    items: Object.values(collection),
     get: function get(key) {
       return collection[key];
     },
