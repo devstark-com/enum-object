@@ -52,13 +52,15 @@ const createFromObject = (obj) => {
 }
 
 const defineEnumUtils = (enumCollection) => {
-  const collection = {...enumCollection}
+  const collection = Object.assign({}, enumCollection)
+  const items = Object.values(collection)
+  const values = items.map(item => item.hasOwnProperty('value') ? item.value : item)
   const utils = {
     collection,
     entries: Object.entries(collection),
     keys: Object.keys(collection),
-    values: Object.values(collection).map(item => item.hasOwnProperty('value') ? item.value : item),
-    items: Object.values(collection),
+    values,
+    items,
     get: (key) => collection[key],
     has: (key) => collection.hasOwnProperty(key),
     getFromValue: (val) => Object.values(collection).find((itemsValue) => itemsValue === val),
@@ -72,6 +74,12 @@ const defineEnumUtils = (enumCollection) => {
       value: Object.freeze(utils)
     }
   })
+
+  // Make enum instance iterable
+  enumCollection[Symbol.iterator] = function () {
+    return items[Symbol.iterator]()
+  }
+
   return enumCollection
 }
 

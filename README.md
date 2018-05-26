@@ -195,14 +195,31 @@ An enum object instance has `$enum` prop, that contains a list of utility props 
 | **Property** | **Description** |
 |:------------|:----------------|
 | `collection` | Enum object without `$enum` prop |
-| `entries` | Array of a enum's elements [key, value] pairs (the same as the result of Object.entries(enumInstance)) |
-| `keys` | Array of a enum's property names (the same as the result of Object.keys(enumInstance)) |
-| `values` | Array of a enum's values |
-| `items` | Array of a enum's items |
+| `entries` | Array of an enum's elements [key, value] pairs (the same as the result of Object.entries(enumInstance)) |
+| `keys` | Array of an enum's property names (the same as the result of Object.keys(enumInstance)) |
+| `values` | Array of an enum's values |
+| `items` | Array of an enum's items |
 | `get(key)` | Get an enum value by key (including additional item's properties) |
 | `getFromValue(val)` | Get enum item by given value |
 | `has(key)` | Boolean: Whether there an enum item with given key |
 | `hasValue(val)` | Boolean: Whether there a corresponding enum value in the enum collection |
+
+
+## Other features
+
+1) Enum instance is immutable, so that once enum is created it's not possible to change the items by mistake.
+2) `$enum` utility prop is located next to the keys of the enum, but unlike them, `$enum` prop is not iterable (not __enumerable__).
+
+Moreover, enum instance is iterable object, that means you can do `for...of`:
+```js
+for (const item of statuses) {
+  console.log(item)
+}
+// { value: 1, label: "Created", color: "grey" }
+// ...
+/// { value: 4, label: "Done", color: "green" }
+```
+
 
 ---
 
