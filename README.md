@@ -8,7 +8,15 @@ A JavaScript Enum object type that allows to easily create enums from arrays or 
 
 
 ## Getting Started
-
+Import as ES6 module
+```js
+import Enum from 'enum-object'
+```
+Or require as CommonJs module:
+```js
+const Enum =  require('enum-object')
+```
+Usage:
 ```js
 import Enum from 'enum-object'
 

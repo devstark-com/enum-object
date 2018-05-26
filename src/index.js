@@ -104,4 +104,5 @@ class Enum {
 
 Enum.create = createEnum
 
-export default Enum
+// to support both es6 modules and commonjs modules
+module.exports = Enum
