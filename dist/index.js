@@ -97,7 +97,7 @@ var defineEnumUtils = function defineEnumUtils(enumCollection) {
     $enum: {
       enumerable: false,
       writable: false,
-      value: utils
+      value: Object.freeze(utils)
     }
   });
   return enumCollection;
