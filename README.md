@@ -14,7 +14,7 @@ import Enum from 'enum-object'
 ```
 Or require as CommonJs module:
 ```js
-const Enum =  require('enum-object')
+const Enum = require('enum-object')
 ```
 Usage:
 ```js
@@ -220,12 +220,13 @@ An enum object instance has `$enum` prop, that contains a list of utility props 
 
 Moreover, enum instance is iterable object, that means you can do `for...of`:
 ```js
+const statuses = new Enum(statusesInputObject)
 for (const item of statuses) {
   console.log(item)
 }
 // { value: 1, label: "Created", color: "grey" }
 // ...
-/// { value: 4, label: "Done", color: "green" }
+// { value: 4, label: "Done", color: "green" }
 ```
 
 
