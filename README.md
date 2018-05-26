@@ -99,7 +99,7 @@ const colors = Enum.create(['red', 'green', 'blue'])
 
 ## Input collection
 
-It's possible to create an enum using either `Array` or `Object` instance as input argument.
+It's possible to create an enum instance using either `Array` or `Object` as input argument.
 
 Array input example:
 ```js
@@ -119,7 +119,7 @@ const gender = new Enum({
 // { male: "m", female: "f", $enum: {...} }
 ```
 
-Both Array and Object notations allow to use objects as values:
+Both Array and Object notations allow to use objects as items:
 
 ```js
 const gender = new Enum([
@@ -134,12 +134,14 @@ const gender = new Enum({
 // the result will be the same
 ```
 
+When using object items, the `value` property of each item is required.
+
 ### Enum keys
 In case of object notation input object's keys always will be the enum keys.
 
-As for Array notation, it depends on type of array elements.
+As for Array notation, it depends on type of array items.
 
-1) simple literal items (String, Number) will be both key and values
+1) simple literal items (`String`, `Number`, `Boolean`) will be both key and value
 2) for object items there should be `key` property defined for each input array item
 
 All the examples below will result in the same set of enum keys:
@@ -162,15 +164,15 @@ const enumFromObject = new Enum({
 console.log(enumFromObject.$enum.keys)
 // ["MALE", "FEMALE"]
 ```
-Notice, that every enum created has `$enum` property, that contains a set of convenient methods and props.
-The full list of those can be found in [$enum utils](#$enum-utils) section.
+Notice that every enum created has `$enum` property, that contains a set of convenient methods and props.
+The full list of those can be found in [$enum utils](#enum-utils) section.
 
 ### Enum items and values
-If the input collection contains objects like `{ value: 1, label: 'Apple', isTasty: true }` then this object itself is an **item**, and it's `value` prop is an **value**.
+If the input collection contains objects like `{ value: 1, label: 'Apple', isTasty: true }` then this object itself is an **item**, and it's `value` prop is a **value**.
 
-If an input collection's item is primitive literal (String, Number, Boolean) than **item** is the same as **value**.
+If an input collection's item is primitive literal (`String`, `Number`, `Boolean`) than **item** is the same as **value**.
 
-It's recommended to create enums with object notation and object values since it's the most flexible way and it's very easy to add additional props in the future without changing existing code.
+__It's recommended to create enums with object notation and object values since it's the most flexible way and it's very easy to add additional props in the future without changing existing code.__
 
 Every **item** object is supplied by `valueOf()` and `toString()` methods (or you can provide them in the input collection), so that it's possible to do comparisons like this:
 ```js
@@ -188,15 +190,15 @@ fruit.apple <= 2
 ```
 
 ## $enum utils
-An enum object instance has `$enum` prop, that contains a list of util props and methods:
+An enum object instance has `$enum` prop, that contains a list of utility props and methods:
 
 | **Property** | **Description** |
 |:------------|:----------------|
 | `collection` | Enum object without `$enum` prop |
 | `entries` | Array of a enum's elements [key, value] pairs (the same as the result of Object.entries(enumInstance)) |
 | `keys` | Array of a enum's property names (the same as the result of Object.keys(enumInstance)) |
-| `values` | Array of a enum's property values |
-| `items` | Array of a enum's property items |
+| `values` | Array of a enum's values |
+| `items` | Array of a enum's items |
 | `get(key)` | Get an enum value by key (including additional item's properties) |
 | `getFromValue(val)` | Get enum item by given value |
 | `has(key)` | Boolean: Whether there an enum item with given key |
