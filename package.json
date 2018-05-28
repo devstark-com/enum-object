@@ -1,7 +1,7 @@
 {
   "name": "enum-object",
-  "version": "0.1.2",
-  "description": "Create and use Enums with awesome API",
+  "version": "0.1.3",
+  "description": "Enum object type that allows to easily create enums from arrays or objects, and offers developer friendly interface.",
   "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

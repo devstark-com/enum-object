@@ -70,28 +70,26 @@ var createFromObject = function createFromObject(obj) {
 var defineEnumUtils = function defineEnumUtils(enumCollection) {
   var collection = Object.assign({}, enumCollection);
   var items = Object.values(collection);
-  var values = items.map(function (item) {
+  var getValue = function getValue(item) {
     return item.hasOwnProperty('value') ? item.value : item;
-  });
+  };
+  var values = items.map(getValue);
   var utils = {
     collection: collection,
     entries: Object.entries(collection),
     keys: Object.keys(collection),
     values: values,
     items: items,
-    get: function get(key) {
-      return collection[key];
-    },
-    has: function has(key) {
+    hasKey: function hasKey(key) {
       return collection.hasOwnProperty(key);
     },
-    getFromValue: function getFromValue(val) {
-      return Object.values(collection).find(function (itemsValue) {
-        return itemsValue === val;
-      });
-    },
     hasValue: function hasValue(val) {
-      return Object.values(collection).includes(val);
+      return values.includes(val);
+    },
+    getByValue: function getByValue(val) {
+      return items.find(function (item) {
+        return getValue(item) === val;
+      });
     }
   };
 
