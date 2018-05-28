@@ -54,17 +54,17 @@ const createFromObject = (obj) => {
 const defineEnumUtils = (enumCollection) => {
   const collection = Object.assign({}, enumCollection)
   const items = Object.values(collection)
-  const values = items.map(item => item.hasOwnProperty('value') ? item.value : item)
+  const getValue = (item) => item.hasOwnProperty('value') ? item.value : item
+  const values = items.map(getValue)
   const utils = {
     collection,
     entries: Object.entries(collection),
     keys: Object.keys(collection),
     values,
     items,
-    get: (key) => collection[key],
-    has: (key) => collection.hasOwnProperty(key),
-    getFromValue: (val) => Object.values(collection).find((itemsValue) => itemsValue === val),
-    hasValue: (val) => Object.values(collection).includes(val)
+    hasKey: (key) => collection.hasOwnProperty(key),
+    hasValue: (val) => values.includes(val),
+    getByValue: (val) => items.find((item) => getValue(item) === val)
   }
 
   Object.defineProperties(enumCollection, {

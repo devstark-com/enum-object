@@ -1,7 +1,7 @@
 # Enum Object
 [![npm](https://img.shields.io/npm/v/enum-object.svg)](https://www.npmjs.com/package/enum-object)
 
-A JavaScript Enum object type that allows to easily create enums from arrays or objects, and offers developer friendly interface.
+A JavaScript Enum object type that allows to easily create enums from arrays or objects, and offers developer-friendly interface.
 
 ## Installation
     $ npm install enum-object
@@ -73,19 +73,27 @@ statuses.$enum.items
 //    { value: 4, label: "Done", color: "green" }
 // ]
 
+statuses.$enum.entries
+// [
+//    [ "created",  { value: 1, label: "Created", color: "grey" } ],
+//   ...
+//    [ "done",  { value: 4, label: "Done", color: "green" } ]
+// ]
+
+
 /* Since `keys`, `values`, `items`, `entries` props are always arrays it's very convenient
 to use them together with map/filter/reduce/etc. array methods, like this: */
 
 statuses.$enum.values.map(i => `${i.label} is ${i.color}`)
 // ["Created is grey", "In Progress is yellow", "Ready is brown", "Done is green"]
 
-statuses.has('cancelled') // no such key
+statuses.hasKey('cancelled') // no such key
 // false
 
 statuses.hasValue(4)
 // true
 
-statuses.getFromValue(1)
+statuses.getByValue(1)
 // { value: 1, label: "Created", color: "grey" }
 ```
 
@@ -172,7 +180,7 @@ const enumFromObject = new Enum({
 console.log(enumFromObject.$enum.keys)
 // ["MALE", "FEMALE"]
 ```
-Notice that every enum created has `$enum` property, that contains a set of convenient methods and props.
+Notice that every enum instance created has `$enum` property, that contains a set of convenient methods and props.
 The full list of those can be found in [$enum utils](#enum-utils) section.
 
 ### Enum items and values
@@ -207,16 +215,15 @@ An enum object instance has `$enum` prop, that contains a list of utility props 
 | `keys` | Array of an enum's property names (the same as the result of Object.keys(enumInstance)) |
 | `values` | Array of an enum's values |
 | `items` | Array of an enum's items |
-| `get(key)` | Get an enum value by key (including additional item's properties) |
-| `getFromValue(val)` | Get enum item by given value |
-| `has(key)` | Boolean: Whether there an enum item with given key |
+| `hasKey(key)` | Boolean: Whether there an enum item with given key |
 | `hasValue(val)` | Boolean: Whether there a corresponding enum value in the enum collection |
+| `getByValue(val)` | Get enum item by given value |
 
 
 ## Other features
 
 1) Enum instance is immutable, so that once enum is created it's not possible to change the items by mistake.
-2) `$enum` utility prop is located next to the keys of the enum, but unlike them, `$enum` prop is not iterable (not __enumerable__).
+2) `$enum` utility prop is located next to the keys of the enum, but unlike them, `$enum` prop is not iterable (not _enumerable_).
 
 Moreover, enum instance is iterable object, that means you can do `for...of`:
 ```js
@@ -229,6 +236,9 @@ for (const item of statuses) {
 // { value: 4, label: "Done", color: "green" }
 ```
 
+## Roadmap
+- [ ] Extend `$enum` util object with own props and methods
+- [ ] Define custom props for each enum item (on Enum instance creation)
 
 ---
 
