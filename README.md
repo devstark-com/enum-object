@@ -87,13 +87,13 @@ to use them together with map/filter/reduce/etc. array methods, like this: */
 statuses.$enum.values.map(i => `${i.label} is ${i.color}`)
 // ["Created is grey", "In Progress is yellow", "Ready is brown", "Done is green"]
 
-statuses.hasKey('cancelled') // no such key
+statuses.$enum.hasKey('cancelled') // no such key
 // false
 
-statuses.hasValue(4)
+statuses.$enum.hasValue(4)
 // true
 
-statuses.getByValue(1)
+statuses.$enum.getByValue(1)
 // { value: 1, label: "Created", color: "grey" }
 ```
 
